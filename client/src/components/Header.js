@@ -1,5 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import Stripe from './Stripe';
 
 const Header = () => {
   const authState = useSelector(state => state.auth);
@@ -16,9 +18,15 @@ const Header = () => {
         );
       default:
         return (
-          <li>
-            <a href="/api/logout">Logout</a>
-          </li>
+          <>
+            <li>
+              <Stripe />
+            </li>
+            <li style={{ marginLeft: '15px' }}>Credits: {authState.credits}</li>
+            <li>
+              <a href="/api/logout">Logout</a>
+            </li>
+          </>
         );
     }
   };
@@ -26,7 +34,9 @@ const Header = () => {
   return (
     <nav>
       <div className="nav-wrapper">
-        <a className="left brand-logo">FULLSTACK</a>
+        <Link to={authState ? '/surveys' : '/'} className="left brand-logo">
+          FULLSTACK
+        </Link>
         <ul className="right">{authRenderContent()}</ul>
       </div>
     </nav>
