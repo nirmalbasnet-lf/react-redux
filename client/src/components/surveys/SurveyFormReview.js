@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { handleSendSurvey } from '../../actions';
@@ -10,6 +10,11 @@ export default props => {
   const [isProcessing, setIsProcessing] = useState(false);
 
   const formState = useSelector(state => state.form.surveyForm.values);
+  const errorState = useSelector(state => state.error);
+
+  useEffect(() => {
+    setIsProcessing(false);
+  }, [errorState]);
 
   const navigate = useNavigate();
 
@@ -27,6 +32,11 @@ export default props => {
 
   return (
     <>
+      {errorState && errorState.error && (
+        <p className="red white-text" style={{ padding: '10px' }}>
+          {errorState.errorMessage}
+        </p>
+      )}
       <h5>Please confirm your entries</h5>
       <div style={{ marginBottom: '20px' }}>{renderSurveyFormValues}</div>
       <button

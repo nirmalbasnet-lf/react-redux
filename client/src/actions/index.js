@@ -1,5 +1,10 @@
 import axios from 'axios';
-import { FETCH_SURVEYS, FETCH_USER, SURVEY_RESPONSE_RECORDED } from './types';
+import {
+  FETCH_SURVEYS,
+  FETCH_USER,
+  SET_ERROR,
+  SURVEY_RESPONSE_RECORDED,
+} from './types';
 
 export const fetchAuthUser = () => async dispatch => {
   const res = await axios.get('/api/current-user');
@@ -12,9 +17,16 @@ export const handleStripeToken = token => async dispatch => {
 };
 
 export const handleSendSurvey = (values, navigate) => async dispatch => {
-  const res = await axios.post('/api/surveys', values);
-  navigate('/surveys');
-  dispatch({ type: FETCH_USER, payload: res.data });
+  try {
+    const res = await axios.post('/api/surveys', values);
+    navigate('/surveys');
+    dispatch({ type: FETCH_USER, payload: res.data });
+  } catch (err) {
+    dispatch({
+      type: SET_ERROR,
+      payload: { error: true, errorMessage: err.response.data.error },
+    });
+  }
 };
 
 export const handleSurveyResponse = (payload, navigate) => async dispatch => {
