@@ -10,6 +10,7 @@ import { authRoutes } from './routes/authRoutes.js'
 import { stripeRoutes } from './routes/stripeRoutes.js'
 import { databaseKeys } from './config/keys.js'
 import { cookieKeys } from './config/keys.js'
+import { surveyRoutes } from './routes/surveyRoutes.js'
 
 const __dirname = path.resolve()
 
@@ -29,6 +30,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 authRoutes(app)
 stripeRoutes(app)
+surveyRoutes(app)
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'))

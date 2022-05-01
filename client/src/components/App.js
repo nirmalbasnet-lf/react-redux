@@ -5,9 +5,9 @@ import Landing from './Landing';
 
 import { fetchAuthUser } from '../actions';
 import Header from './Header';
-
-const Dashboard = () => <h2>Dashboard</h2>;
-const SurveyNew = () => <h2>SurveyNew</h2>;
+import CreateSurvey from './surveys/CreateSurvey';
+import Dashboard from './Dashboard';
+import SurveyResponse from './surveys/SurveyResponse';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -23,7 +23,11 @@ const App = () => {
         <Routes>
           <Route path="/" exact element={<Landing />} />
           <Route path="/surveys" exact element={<Dashboard />} />
-          <Route path="/surveys/new" element={<SurveyNew />} />
+          <Route path="/surveys/new" element={<CreateSurvey />} />
+          <Route
+            path="/surveys/:surveyId/response/:status"
+            element={<SurveyResponse />}
+          />
         </Routes>
       </BrowserRouter>
     </div>

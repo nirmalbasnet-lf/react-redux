@@ -15,3 +15,13 @@ export const stripeKeys = {
   stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
   stripeSecretKey: process.env.STRIPE_SECRET_KEY,
 }
+
+export const mailKeys = {
+  service: 'gmail',
+  user: 'nirmalbasnet@lftechnology.com',
+  pass: 'nmiarnmiasla@lf',
+}
+
+export const appKeys = {
+  host: process.env.APP_HOST,
+}
