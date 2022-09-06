@@ -18,8 +18,8 @@ export const stripeKeys = {
 
 export const mailKeys = {
   service: 'gmail',
-  user: 'nirmalbasnet@lftechnology.com',
-  pass: 'nmiarnmiasla@lf',
+  user: '',
+  pass: '',
 }
 
 export const appKeys = {
